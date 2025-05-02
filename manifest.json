@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "TOTP Authenticator",
+  "version": "1.0",
+  "description": "extensao basica para geracão de codigos TOTP localmente",
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icons/icon.png"
+    }
+  }
+}
