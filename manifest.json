@@ -1,13 +1,20 @@
 {
   "manifest_version": 3,
-  "name": "TOTP Authenticator",
-  "version": "1.0",
-  "description": "extensao basica para geracão de codigos TOTP localmente",
-  "permissions": ["storage"],
+  "name": "2Key Authenticator",
+  "short_name": "2Key",
+  "version": "1.0.0",
+  "description": "To Key. Or not to Key. Uma simples extensão para autenticação em duas etapas.",
+  "permissions": ["windows", "system.display"],
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "48": "icons/icon.png"
-    }
-  }
+    "default_title": "Abrir 2Key"
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "author": "Thierry Castro"
 }

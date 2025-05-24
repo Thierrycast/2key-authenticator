@@ -1,13 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <title>TOTP Auth</title>
+    <title>TOTP Authenticator</title>
     <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
-    <h1>TOTP Authenticator</h1>
-    <div id="code">000000</div>
+    <div class="janela">
+      <h1 class="titulo">TOTP Authenticator</h1>
+
+      <!-- View: lista de codigos -->
+      <div class="view" id="view-lista">
+        <div id="lista-codigos"></div>
+        <button class="botao-add" id="abrir-formulario" title="Adicionar chave">+</button>
+      </div>
+
+      <!-- View: adicionar nova chave -->
+      <div class="view"	 id="view-adicionar" style="display: none">
+        <form id="form-chave" class="form-adicionar">
+          <label>
+            Nome da conta
+            <input type="text" name="nome" required />
+          </label>
+          <label>
+            Chave secreta (base32)
+            <input type="text" name="chave" required />
+          </label>
+          <div class="botoes-form">
+            <button type="submit" class="botao-salvar">Salvar</button>
+            <button type="button" class="botao-cancelar" id="cancelar-form">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <script src="popup.js"></script>
   </body>
 </html>
