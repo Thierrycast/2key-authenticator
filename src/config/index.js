@@ -1,3 +1,5 @@
+import { configurarGerenciar } from "./logic/gerenciar.js";
+
 const EXPIRACAO_KEY = "tempoExpiracao";
 
 function carregarConfiguracoes() {
@@ -58,4 +60,5 @@ document.addEventListener("DOMContentLoaded", () => {
   carregarConfiguracoes();
   configurarListeners();
   configurarNavegacao();
+  configurarGerenciar();
 });
