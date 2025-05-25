@@ -45,6 +45,8 @@ body {
 
 #view-lista {
   gap: 12px;
+  padding: 0;
+  justify-content: start;
 }
 
 #lista-codigos {
