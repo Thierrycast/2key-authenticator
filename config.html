@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Configurações - 2Key Authenticator</title>
+    <link rel="stylesheet" href="config.css" />
+    <style>
+      .alerta {
+        display: none;
+        margin-top: 16px;
+        font-size: 13px;
+        color: #fbbf24;
+        line-height: 1.7;
+      }
+      .alerta strong {
+        color: #facc15;
+        font-weight: 600;
+      }
+      .alerta h3 {
+        margin-bottom: 8px;
+        font-size: 14px;
+        color: #fde047;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Configurações</h1>
+
+      <form id="form-config">
+        <section>
+          <h2>Segurança</h2>
+          <label>
+            <span>Tempo sem pedir senha:</span>
+            <select id="tempo-expiracao">
+              <option value="0">Sempre pedir</option>
+              <option value="5">5 minutos</option>
+              <option value="30">30 minutos</option>
+              <option value="session">Até fechar o navegador</option>
+              <option value="boot">Até desligar o PC</option>
+              <option value="forever">Nunca pedir senha</option>
+            </select>
+          </label>
+
+          <div class="alerta">
+            <h3>⚠️ Atenção: sobre manter a senha salva</h3>
+            <p>
+              A senha protege os <strong>segredos</strong> usados para gerar seus códigos.
+              Se você escolher manter a sessão ativa, essa senha será armazenada temporariamente no seu navegador.
+            </p>
+            <p>
+              Isso pode permitir que outras pessoas acessem seus códigos caso tenham acesso ao seu computador desbloqueado.
+            </p>
+            <p>
+              <strong>Use essa opção apenas em computadores e ambientes seguros.</strong>
+            </p>
+          </div>
+        </section>
+
+        <button id="salvar-config" class="botao-salvar" type="submit">Salvar Configurações</button>
+        <p id="mensagem-sucesso" class="mensagem-sucesso" style="display: none;">Configurações salvas com sucesso ✅</p>
+      </form>
+
+      <footer>
+        <p class="creditos">2Key Authenticator por Thierry Castro</p>
+      </footer>
+    </div>
+
+    <script type="module" src="config.js"></script>
+  </body>
+</html>

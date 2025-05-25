@@ -307,3 +307,22 @@ body {
   height: 14px;
   display: block;
 }
+
+.botao-config {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  font-size: 14px;
+  color: #ccc;
+  background: transparent;
+  border: 1px solid #555;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.botao-config:hover {
+  background-color: #2b2b30;
+  color: #fff;
+  border-color: #aaa;
+}

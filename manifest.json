@@ -16,5 +16,6 @@
     "48": "icons/icon.png",
     "128": "icons/icon.png"
   },
+  "options_page": "config.html",
   "author": "Thierry Castro"
 }

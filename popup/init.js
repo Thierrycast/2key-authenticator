@@ -18,19 +18,79 @@ function configurarViewToggle() {
   });
 }
 
+function getExpiracaoConfig() {
+  return localStorage.getItem("tempoExpiracao") ?? "0";
+}
+
+function sessaoAindaValida() {
+  const modo = getExpiracaoConfig();
+  const inicio = localStorage.getItem("expiracao.inicio");
+  const boot = localStorage.getItem("expiracao.boot");
+  const agora = Date.now();
+
+  if (modo === "forever") return sessionStorage.getItem("senhaMestre") !== null;
+  if (modo === "session") return sessionStorage.getItem("expiracao.session") === "ativa";
+  if (modo === "boot") return boot !== null;
+  if (modo === "5") return agora - inicio < 5 * 60 * 1000;
+  if (modo === "30") return agora - inicio < 30 * 60 * 1000;
+
+  return false;
+}
+
+function registrarInicioSessao() {
+  const modo = getExpiracaoConfig();
+  const agora = Date.now();
+  localStorage.setItem("expiracao.inicio", agora);
+
+  if (modo === "session") {
+    sessionStorage.setItem("expiracao.session", "ativa");
+  } else if (modo === "boot") {
+    localStorage.setItem("expiracao.boot", "1");
+  }
+
+  if (modo === "5") {
+    setTimeout(() => sessionStorage.removeItem("senhaMestre"), 5 * 60 * 1000);
+  } else if (modo === "30") {
+    setTimeout(() => sessionStorage.removeItem("senhaMestre"), 30 * 60 * 1000);
+  }
+}
+
+function limparSessao() {
+  sessionStorage.removeItem("expiracao.session");
+  sessionStorage.removeItem("senhaMestre");
+  localStorage.removeItem("expiracao.boot");
+  localStorage.removeItem("expiracao.inicio");
+  chaveCryptoRef.current = null;
+}
+
 function prosseguir() {
   mostrarView("view-lista");
   carregarChaves(chaveCryptoRef.current);
   atualizarTotps();
-
   setInterval(() => atualizarTotps(), 1000);
+  registrarInicioSessao();
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
   await inicializarSeguranca();
-
   configurarViewToggle();
   configurarPrivacidadeOverlay();
+
+  if (sessaoAindaValida()) {
+    const senha = sessionStorage.getItem("senhaMestre");
+    if (senha) {
+      const db = await indexedDB.open("2KeyDB");
+      const tx = db.result.transaction("meta");
+      const saltReq = tx.objectStore("meta").get("salt");
+      saltReq.onsuccess = async () => {
+        if (saltReq.result) {
+          chaveCryptoRef.current = await derivarChave(senha, saltReq.result);
+          prosseguir();
+        }
+      };
+      return;
+    }
+  }
 
   document.getElementById("form-senha-inicial")?.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -38,6 +98,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!senha) return;
 
     chaveCryptoRef.current = await criarSenhaMestre(senha);
+    sessionStorage.setItem("senhaMestre", senha);
     prosseguir();
   });
 
@@ -49,6 +110,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       chaveCryptoRef.current = await logarComSenha(senha);
       const chaves = await listarChaves();
+      sessionStorage.setItem("senhaMestre", senha);
+
       if (chaves.length === 0) return prosseguir();
 
       await descriptografarSegredo(
@@ -60,6 +123,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       prosseguir();
     } catch {
       document.getElementById("erro-login").style.display = "block";
+      limparSessao();
     }
   });
 
@@ -74,4 +138,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     await salvarNovaChave(chaveCryptoRef.current, nome, segredo);
     form.reset();
   });
+});
+
+document.getElementById("abrir-config")?.addEventListener("click", () => {
+  chrome.runtime.openOptionsPage();
 });
