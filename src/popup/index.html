@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>2Key Authenticator</title>
-    <link rel="stylesheet" href="popup.css" />
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <div class="janela">
@@ -40,7 +40,7 @@
 
       <div class="view" id="view-lista">
         <button id="toggle-privacidade" class="botao-olho" title="Ocultar códigos">
-          <img src="icons/eye-icon.svg" alt="">
+          <img src="../../public/icons/eye-icon.svg" alt="Ícone olho">
         </button>
         <div id="lista-codigos"></div>
         <button class="botao-add" id="abrir-formulario" title="Adicionar chave">+</button>
@@ -51,7 +51,7 @@
         <button id="toggle-visibilidade" class="botao-visibilidade" title="Exibir códigos">Exibir códigos</button>
       </div>
 
-      <div class="view"	 id="view-adicionar" style="display: none">
+      <div class="view" id="view-adicionar" style="display: none">
         <form id="form-chave" class="form-adicionar">
           <label>
             Nome da conta
@@ -70,6 +70,6 @@
     </div>
 
     <button id="abrir-config" class="botao-config">⚙️ Configurações</button>
-    <script type="module" src="./popup/init.js"></script>
+    <script type="module" src="./index.js"></script>
   </body>
 </html>

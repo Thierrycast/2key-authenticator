@@ -1,4 +1,4 @@
-import { gerarTOTP } from "../lib/totp.js";
+import { gerarTOTP } from "../../core/totp.js";
 
 export async function renderCodigos(lista) {
   const container = document.getElementById("lista-codigos");

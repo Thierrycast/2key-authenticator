@@ -1,4 +1,6 @@
 body {
+  max-height: 100vh;
+  overflow-y: auto;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: #18181b;
   color: #f4f4f5;

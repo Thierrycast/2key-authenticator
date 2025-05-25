@@ -1,6 +1,6 @@
-import { derivarChave } from "../lib/vault.js";
-import { abrirDB, salvarMeta, lerMeta } from "../lib/db.js";
-import { mostrarView } from "./views.js";
+import { derivarChave, getOrCreateSalt } from "../../core/cryptoVault.js";
+import { abrirDB, salvarMeta, lerMeta } from "../../storage/db.js";
+import { mostrarView } from "../ui/views.js";
 
 export async function inicializarSeguranca() {
   const salt = await lerMeta("salt");
@@ -12,9 +12,9 @@ export async function inicializarSeguranca() {
 }
 
 export async function criarSenhaMestre(senha) {
+  if (senha.length < 6) throw new Error("Senha muito curta");
   const db = await abrirDB();
-  const salt = crypto.getRandomValues(new Uint8Array(16));
-  await salvarMeta("salt", salt);
+  const salt = await getOrCreateSalt(db);
   return await derivarChave(senha, salt);
 }
 

@@ -4,7 +4,7 @@ chrome.action.onClicked.addListener(() => {
 
   chrome.windows.getCurrent((currentWindow) => {
     chrome.windows.create({
-      url: "popup.html",
+      url: "src/popup/index.html",
       type: "popup",
       width: width,
       height: height,
