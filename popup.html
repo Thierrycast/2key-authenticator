@@ -9,13 +9,19 @@
     <div class="janela">
       <h1 class="titulo">2Key Authenticator</h1>
 
-      <!-- View: lista de codigos -->
       <div class="view" id="view-lista">
+        <button id="toggle-privacidade" class="botao-olho" title="Ocultar códigos">
+          <img src="icons/eye-icon.svg" alt="">
+        </button>
         <div id="lista-codigos"></div>
         <button class="botao-add" id="abrir-formulario" title="Adicionar chave">+</button>
       </div>
 
-      <!-- View: adicionar nova chave -->
+      <div id="privacidade-overlay" class="overlay-privacidade">
+        <p class="mensagem-privada">👀 Opa... <br>tem certeza que não tem ninguém de olho?</p>
+        <button id="toggle-visibilidade" class="botao-visibilidade" title="Exibir códigos">Exibir códigos</button>
+      </div>
+
       <div class="view"	 id="view-adicionar" style="display: none">
         <form id="form-chave" class="form-adicionar">
           <label>

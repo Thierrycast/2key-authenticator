@@ -1,5 +1,5 @@
 chrome.action.onClicked.addListener(() => {
-  const width = 370;
+  const width = 360;
   const height = 500;
 
   chrome.windows.getCurrent((currentWindow) => {

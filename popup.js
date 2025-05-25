@@ -96,9 +96,27 @@ function configurarViewToggle() {
   });
 }
 
+function configurarPrivacidadeOverlay() {
+  const overlay = document.getElementById("privacidade-overlay");
+  const toggle = document.getElementById("toggle-visibilidade");
+
+  // Mostra por padrão ao abrir
+  overlay.style.display = "flex";
+
+  toggle.addEventListener("click", () => {
+    overlay.style.display = "none";
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderCodigos(codigosMock);
   atualizarTotps();
   setInterval(atualizarTotps, 1000);
   configurarViewToggle();
+  configurarPrivacidadeOverlay();
+});
+
+document.getElementById("toggle-privacidade").addEventListener("click", () => {
+  const overlay = document.getElementById("privacidade-overlay");
+  overlay.style.display = "flex";
 });
