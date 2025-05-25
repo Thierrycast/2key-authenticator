@@ -1,8 +1,7 @@
 chrome.action.onClicked.addListener(() => {
-  const width = 410;
+  const width = 370;
   const height = 500;
 
-  // Obtem a largura da tela principal do navegador
   chrome.windows.getCurrent((currentWindow) => {
     chrome.windows.create({
       url: "popup.html",
