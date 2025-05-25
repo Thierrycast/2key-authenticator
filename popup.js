@@ -1,16 +1,5 @@
 import { gerarTOTP } from "./totp.js";
-
-const codigosMock = [
-  { nome: "GitHub", segredo: "JBSWY3DPEHPE3PXP" },
-  { nome: "Google", segredo: "JBSWY3DPEHPK3PXP" },
-  { nome: "Discord", segredo: "JBSWY3DPEHPK3PXP" },
-  { nome: "GitHub", segredo: "JBSWY3DPEHPK3PXP" },
-  { nome: "Google", segredo: "JBSWY3DPEHPK3PXP" },
-  { nome: "Discord", segredo: "JBSWY3DPEHPK3PXP" },
-  { nome: "GitHub", segredo: "JBSWY3DPEHPK3PXP" },
-  { nome: "Google", segredo: "JBSWY3DPEHPK3PXP" },
-  { nome: "Discord", segredo: "JBSWY3DPEHPK3PXP" }
-];
+import { salvarChave, listarChaves } from "./db.js";
 
 function renderCodigos(lista) {
   const container = document.getElementById("lista-codigos");
@@ -99,24 +88,46 @@ function configurarViewToggle() {
 function configurarPrivacidadeOverlay() {
   const overlay = document.getElementById("privacidade-overlay");
   const toggle = document.getElementById("toggle-visibilidade");
+  const toggleOlho = document.getElementById("toggle-privacidade");
 
-  // Mostra por padrão ao abrir
   overlay.style.display = "flex";
 
-  toggle.addEventListener("click", () => {
+  toggle?.addEventListener("click", () => {
     overlay.style.display = "none";
+  });
+
+  toggleOlho?.addEventListener("click", () => {
+    overlay.style.display = "flex";
   });
 }
 
+async function carregarChaves() {
+  const chaves = await listarChaves();
+  renderCodigos(chaves);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  renderCodigos(codigosMock);
+  carregarChaves();
   atualizarTotps();
   setInterval(atualizarTotps, 1000);
   configurarViewToggle();
   configurarPrivacidadeOverlay();
-});
 
-document.getElementById("toggle-privacidade").addEventListener("click", () => {
-  const overlay = document.getElementById("privacidade-overlay");
-  overlay.style.display = "flex";
+  document.getElementById("form-chave").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const nome = form.nome.value.trim();
+    const chave = form.chave.value.trim();
+    if (!nome || !chave) return;
+
+    const id = nome.toLowerCase().replace(/\s+/g, "-");
+    await salvarChave({ id, nome, segredo: chave });
+
+    form.reset();
+    document.getElementById("view-adicionar").style.display = "none";
+    document.getElementById("view-lista").style.display = "flex";
+
+    await carregarChaves();
+    atualizarTotps();
+  });
 });
