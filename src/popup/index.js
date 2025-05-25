@@ -3,7 +3,7 @@ import { atualizarTotps } from "./logic/totpCycle.js";
 import { configurarPrivacidadeOverlay } from "./ui/overlay.js";
 import {inicializarSeguranca,criarSenhaMestre, logarComSenha} from "./logic/auth.js";
 import {carregarChaves, salvarNovaChave} from "./logic/events.js";
-import { listarChaves } from "../storage/db.js";
+import { listarChaves, lerMeta } from "../storage/db.js";
 import {derivarChave, descriptografarSegredo} from "../core/cryptoVault.js";
 import {sessaoAindaValida,registrarInicioSessao,limparSessao} from "../core/session.js";
 
@@ -35,16 +35,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (sessaoAindaValida()) {
     const senha = localStorage.getItem("senhaMestre");
     if (senha) {
-      const db = await indexedDB.open("2KeyDB");
-      const tx = db.result.transaction("meta");
-      const saltReq = tx.objectStore("meta").get("salt");
-      saltReq.onsuccess = async () => {
-        if (saltReq.result) {
-          chaveCryptoRef.current = await derivarChave(senha, saltReq.result);
-          prosseguir();
-        }
-      };
-      return;
+      const salt = await lerMeta("salt");
+      if (salt) {
+        chaveCryptoRef.current = await derivarChave(senha, salt);
+        prosseguir();
+        return;
+      }
     }
   }
 
