@@ -9,6 +9,35 @@
     <div class="janela">
       <h1 class="titulo">2Key Authenticator</h1>
 
+      <div id="view-inicial" class="view" style="display: none;">
+        <h2 class="titulo">Boas-vindas 👋</h2>
+        <p class="texto-explica">
+          Para proteger seus códigos 2FA, defina uma <strong>senha mestre</strong>. Ela será usada para criptografar suas chaves secretas e ninguém mais (nem a extensão) poderá acessá-las sem ela.
+        </p>
+        <form id="form-senha-inicial" class="form-adicionar">
+          <label>
+            Definir senha mestre
+            <input type="password" name="senha" required />
+          </label>
+          <button class="botao-salvar" type="submit">Começar</button>
+        </form>
+      </div>
+
+      <div id="view-login" class="view" style="display: none;">
+        <h2 class="titulo">Digite sua senha 🔒</h2>
+        <p class="texto-explica">
+          Para acessar seus códigos 2FA, digite a senha mestre que você criou.
+        </p>
+        <form id="form-login" class="form-adicionar">
+          <label>
+            Senha mestre
+            <input type="password" name="senha" required />
+          </label>
+          <button class="botao-salvar" type="submit">Desbloquear</button>
+          <p id="erro-login" class="erro" style="display: none; color: #f87171; font-size: 13px;">Senha incorreta</p>
+        </form>
+      </div>
+
       <div class="view" id="view-lista">
         <button id="toggle-privacidade" class="botao-olho" title="Ocultar códigos">
           <img src="icons/eye-icon.svg" alt="">

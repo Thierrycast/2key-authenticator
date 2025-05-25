@@ -1,7 +1,17 @@
 import { gerarTOTP } from "./totp.js";
-import { salvarChave, listarChaves } from "./db.js";
+import { salvarChave, listarChaves, salvarMeta, lerMeta, abrirDB } from "./db.js";
+import { derivarChave, criptografarSegredo, descriptografarSegredo } from "./vault.js";
 
-function renderCodigos(lista) {
+let chaveCrypto = null;
+
+function mostrarView(id) {
+  document.querySelectorAll(".view").forEach((el) => {
+    el.style.display = "none";
+  });
+  document.getElementById(id).style.display = "flex";
+}
+
+async function renderCodigos(lista) {
   const container = document.getElementById("lista-codigos");
   container.innerHTML = "";
 
@@ -75,13 +85,11 @@ async function atualizarTotps() {
 
 function configurarViewToggle() {
   document.getElementById("abrir-formulario").addEventListener("click", () => {
-    document.getElementById("view-lista").style.display = "none";
-    document.getElementById("view-adicionar").style.display = "flex";
+    mostrarView("view-adicionar");
   });
 
   document.getElementById("cancelar-form").addEventListener("click", () => {
-    document.getElementById("view-adicionar").style.display = "none";
-    document.getElementById("view-lista").style.display = "flex";
+    mostrarView("view-lista");
   });
 }
 
@@ -103,30 +111,109 @@ function configurarPrivacidadeOverlay() {
 
 async function carregarChaves() {
   const chaves = await listarChaves();
-  renderCodigos(chaves);
+
+  const desencriptadas = await Promise.all(
+    chaves.map(async (item) => {
+      try {
+        const segredo = await descriptografarSegredo(
+          chaveCrypto,
+          new Uint8Array(item.segredoCriptografado),
+          new Uint8Array(item.iv)
+        );
+        return { nome: item.nome, segredo };
+      } catch {
+        return null;
+      }
+    })
+  );
+
+  renderCodigos(desencriptadas.filter(Boolean));
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+async function inicializarSeguranca() {
+  const salt = await lerMeta("salt");
+
+  if (!salt) {
+    mostrarView("view-inicial");
+  } else {
+    mostrarView("view-login");
+  }
+}
+
+function prosseguir() {
+  mostrarView("view-lista");
   carregarChaves();
   atualizarTotps();
-  setInterval(atualizarTotps, 1000);
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  await inicializarSeguranca();
+
   configurarViewToggle();
   configurarPrivacidadeOverlay();
 
-  document.getElementById("form-chave").addEventListener("submit", async (e) => {
+  document.getElementById("form-senha-inicial")?.addEventListener("submit", async (e) => {
     e.preventDefault();
+    const senha = e.target.senha.value.trim();
+    if (!senha) return;
+
+    const db = await abrirDB();
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+    await salvarMeta("salt", salt);
+    chaveCrypto = await derivarChave(senha, salt);
+
+    mostrarView("view-lista");
+    await carregarChaves();
+    atualizarTotps();
+  });
+
+  document.getElementById("form-login")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const senha = e.target.senha.value.trim();
+    if (!senha) return;
+
+    const salt = await lerMeta("salt");
+    chaveCrypto = await derivarChave(senha, salt);
+
+    const chaves = await listarChaves();
+    if (chaves.length === 0) {
+      prosseguir();
+      return;
+    }
+
+    try {
+      await descriptografarSegredo(
+        chaveCrypto,
+        new Uint8Array(chaves[0].segredoCriptografado),
+        new Uint8Array(chaves[0].iv)
+      );
+      prosseguir();
+    } catch {
+      document.getElementById("erro-login").style.display = "block";
+    }
+  });
+
+  document.getElementById("form-chave")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
     const form = e.target;
     const nome = form.nome.value.trim();
-    const chave = form.chave.value.trim();
-    if (!nome || !chave) return;
+    const segredo = form.chave.value.trim();
+    if (!nome || !segredo || !chaveCrypto) return;
 
     const id = nome.toLowerCase().replace(/\s+/g, "-");
-    await salvarChave({ id, nome, segredo: chave });
+
+    const { cifrado, iv } = await criptografarSegredo(chaveCrypto, segredo);
+
+    await salvarChave({
+      id,
+      nome,
+      segredoCriptografado: Array.from(cifrado),
+      iv: Array.from(iv)
+    });
 
     form.reset();
-    document.getElementById("view-adicionar").style.display = "none";
-    document.getElementById("view-lista").style.display = "flex";
-
+    mostrarView("view-lista");
     await carregarChaves();
     atualizarTotps();
   });

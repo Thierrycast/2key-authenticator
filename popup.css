@@ -1,3 +1,4 @@
+/* RESET */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -29,11 +30,20 @@ body {
   margin: 16px 0;
 }
 
-#view-lista {
+.view {
+  display: none;
   flex: 1;
-  overflow-y: auto;
-  display: flex;
   flex-direction: column;
+  padding: 0 24px 100px 24px;
+  overflow-y: auto;
+  justify-content: center;
+}
+
+.view::-webkit-scrollbar {
+  display: none;
+}
+
+#view-lista {
   gap: 12px;
 }
 
@@ -93,20 +103,6 @@ body {
 
 .botao-add:hover {
   background-color: #1d4ed8;
-}
-
-#view-lista::-webkit-scrollbar,
-#view-adicionar::-webkit-scrollbar {
-  display: none;
-}
-
-#view-adicionar {
-  flex: 1;
-  padding: 0 24px 100px 24px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .form-adicionar {
@@ -278,7 +274,6 @@ body {
   background-color: #2b2b30;
   border-color: #aaa;
 }
-
 
 .botao-olho {
   display: flex;
