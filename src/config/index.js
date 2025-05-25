@@ -2,6 +2,7 @@ const EXPIRACAO_KEY = "tempoExpiracao";
 
 function carregarConfiguracoes() {
   const select = document.getElementById("tempo-expiracao");
+  if (!select) return;
   const tempo = localStorage.getItem(EXPIRACAO_KEY) ?? "0";
   select.value = tempo;
   atualizarAvisoSenha(tempo);
@@ -9,13 +10,17 @@ function carregarConfiguracoes() {
 
 function atualizarAvisoSenha(valor) {
   const alerta = document.querySelector(".alerta");
-  alerta.style.display = valor === "0" ? "none" : "block";
+  if (alerta) {
+    alerta.style.display = valor === "0" ? "none" : "block";
+  }
 }
 
 function configurarListeners() {
   const form = document.getElementById("form-config");
   const select = document.getElementById("tempo-expiracao");
   const msg = document.getElementById("mensagem-sucesso");
+
+  if (!form || !select || !msg) return;
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -32,7 +37,25 @@ function configurarListeners() {
   });
 }
 
+function configurarNavegacao() {
+  const botoes = document.querySelectorAll(".item-nav");
+  const paginas = document.querySelectorAll(".pagina");
+
+  botoes.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const alvo = btn.dataset.page;
+
+      botoes.forEach((b) => b.classList.remove("ativo"));
+      btn.classList.add("ativo");
+
+      paginas.forEach((p) => p.classList.remove("ativa"));
+      document.getElementById(`pagina-${alvo}`)?.classList.add("ativa");
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   carregarConfiguracoes();
   configurarListeners();
+  configurarNavegacao();
 });
