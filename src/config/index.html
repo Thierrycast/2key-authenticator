@@ -10,8 +10,8 @@
     <div class="sidebar">
       <h2 class="titulo-sidebar">2Key</h2>
       <button class="item-nav ativo" data-page="seguranca">🔒<span>Segurança</span></button>
-      <button class="item-nav" data-page="vermelha">🟥<span>Página 2</span></button>
-      <button class="item-nav" data-page="verde">🟩<span>Página 3</span></button>
+      <!-- <button class="item-nav" data-page="vermelha">🟥<span>Página 2</span></button> -->
+      <button class="item-nav" data-page="gerenciar">🗝️<span>Gerenciar</span></button>
     </div>
 
     <main class="conteudo">
@@ -53,18 +53,26 @@
         </div>
       </div>
 
-      
-      <div id="pagina-vermelha" class="pagina" style="background-color: #dc2626; height: 300px;"></div>
+      <!-- <div id="pagina-vermelha" class="pagina" style="background-color: #dc2626; height: 300px;"></div> -->
 
-      <div id="pagina-verde" class="pagina">
+      <div id="pagina-gerenciar" class="pagina">
         <div class="container">
           <h1>Gerenciar Códigos</h1>
-          <section id="lista-chaves">
-            
-          </section>
+          <section id="lista-chaves"></section>
         </div>
       </div>
     </main>
+
+    <div id="popup-editar" class="popup" style="display: none;">
+      <div class="popup-conteudo">
+        <h2>Editar Nome</h2>
+        <input type="text" id="novo-nome" placeholder="Novo nome da chave" />
+        <div class="botoes">
+          <button id="cancelar-edicao">Cancelar</button>
+          <button id="salvar-edicao">Salvar</button>
+        </div>
+      </div>
+    </div>
 
     <script type="module" src="./index.js"></script>
   </body>

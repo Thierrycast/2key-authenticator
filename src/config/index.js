@@ -51,7 +51,14 @@ function configurarNavegacao() {
       btn.classList.add("ativo");
 
       paginas.forEach((p) => p.classList.remove("ativa"));
-      document.getElementById(`pagina-${alvo}`)?.classList.add("ativa");
+      const paginaAlvo = document.getElementById(`pagina-${alvo}`);
+      if (paginaAlvo) {
+        paginaAlvo.classList.add("ativa");
+
+        if (alvo === "gerenciar") {
+          configurarGerenciar();
+        }
+      }
     });
   });
 }

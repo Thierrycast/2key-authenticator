@@ -15,7 +15,6 @@ body {
   padding: 24px 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
   border-right: 1px solid #2e2e32;
 }
 
@@ -194,4 +193,81 @@ main .pagina.ativa {
 
 .chave-item .acoes button:hover {
   opacity: 0.7;
+}
+
+.popup {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.popup-conteudo {
+  background-color: #1f1f23;
+  padding: 24px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.popup-conteudo h2 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 18px;
+  color: #f4f4f5;
+}
+
+.popup-conteudo input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background-color: #27272a;
+  color: #f4f4f5;
+  margin-bottom: 16px;
+}
+
+.popup-conteudo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+.botoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.botao-remover {
+  background-color: #ef4444;
+  border: none;
+  color: white;
+  padding: 4px 8px;
+  margin-left: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.chave-item .acoes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chave-item .acoes svg {
+  width: 20px;
+  height: 20px;
+  stroke: #a1a1aa;
 }
