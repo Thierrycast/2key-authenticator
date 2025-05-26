@@ -12,7 +12,7 @@ export async function inicializarSeguranca() {
 }
 
 export async function criarSenhaMestre(senha) {
-  if (senha.length < 6) throw new Error("Senha muito curta");
+  if (senha.length < 6) throw new Error("senha muito curta. Use no mínimo 6 caracteres.");
   const db = await abrirDB();
   const salt = await getOrCreateSalt(db);
   return await derivarChave(senha, salt);

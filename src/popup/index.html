@@ -12,14 +12,24 @@
       <div id="view-inicial" class="view" style="display: none;">
         <h2 class="titulo">Boas-vindas 👋</h2>
         <p class="texto-explica">
-          Para proteger seus códigos 2FA, defina uma <strong>senha mestre</strong>. Ela será usada para criptografar suas chaves secretas e ninguém mais (nem a extensão) poderá acessá-las sem ela.
+          Para proteger seus códigos 2FA, defina uma <strong>senha mestre</strong>.
+          Ela será usada para criptografar suas chaves secretas e ninguém mais
+          (nem a extensão) poderá acessá-las sem ela.
         </p>
+
         <form id="form-senha-inicial" class="form-adicionar">
           <label>
             Definir senha mestre
             <input type="password" name="senha" required />
           </label>
           <button class="botao-salvar" type="submit">Começar</button>
+
+          <p id="erro-senha-inicial" class="erro" style="min-height: 18px;color: #f87171;
+            font-size: 13px;
+            margin-top: 8px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+          "></p>
         </form>
       </div>
 

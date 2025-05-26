@@ -2,6 +2,22 @@ import { configurarGerenciar } from "./logic/gerenciar.js";
 
 const EXPIRACAO_KEY = "tempoExpiracao";
 
+function verificarAutenticacao() {
+  const senha = localStorage.getItem("senhaMestre");
+  if (!senha) {
+    document.body.innerHTML = `
+      <div class="container" style="padding-top: 80px; text-align: center;">
+        <h1>🔒 Acesso restrito</h1>
+        <p style="color: #a1a1aa; font-size: 15px; margin-top: 12px;">
+          Por segurança, acesse o <strong>popup</strong> da extensão e autentique-se com sua senha mestre.
+        </p>
+      </div>
+    `;
+    return false;
+  }
+  return true;
+}
+
 function carregarConfiguracoes() {
   const select = document.getElementById("tempo-expiracao");
   if (!select) return;
@@ -51,19 +67,14 @@ function configurarNavegacao() {
       btn.classList.add("ativo");
 
       paginas.forEach((p) => p.classList.remove("ativa"));
-      const paginaAlvo = document.getElementById(`pagina-${alvo}`);
-      if (paginaAlvo) {
-        paginaAlvo.classList.add("ativa");
-
-        if (alvo === "gerenciar") {
-          configurarGerenciar();
-        }
-      }
+      document.getElementById(`pagina-${alvo}`)?.classList.add("ativa");
     });
   });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  if (!verificarAutenticacao()) return;
+
   carregarConfiguracoes();
   configurarListeners();
   configurarNavegacao();

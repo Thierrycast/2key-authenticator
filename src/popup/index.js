@@ -47,11 +47,22 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("form-senha-inicial")?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const senha = e.target.senha.value.trim();
+    const erroEl = document.getElementById("erro-senha-inicial");
+    erroEl.textContent = "";
+    erroEl.style.opacity = "0";
     if (!senha) return;
-
-    chaveCryptoRef.current = await criarSenhaMestre(senha);
-    localStorage.setItem("senhaMestre", senha);
-    prosseguir();
+    
+    try {
+      chaveCryptoRef.current = await criarSenhaMestre(senha);
+      localStorage.setItem("senhaMestre", senha);
+      prosseguir();
+    } catch (err) {
+      erroEl.textContent = err.message || "Erro ao criar senha";
+      erroEl.style.opacity = "1";
+      setTimeout(() => {
+        erroEl.style.opacity = "0";
+      }, 3000);
+    }
   });
 
   document.getElementById("form-login")?.addEventListener("submit", async (e) => {
