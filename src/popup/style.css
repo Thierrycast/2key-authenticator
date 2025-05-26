@@ -114,6 +114,7 @@ body {
 }
 
 .form-adicionar label {
+  margin-top: 10px;
   font-size: 13px;
   color: #ccc;
   display: flex;
@@ -325,4 +326,10 @@ body {
   background-color: #2b2b30;
   color: #fff;
   border-color: #aaa;
+}
+
+.erro {
+  color: #f87171;
+  font-size: 13px;
+  margin-top: 8px;
 }

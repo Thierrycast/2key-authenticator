@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Configurações - 2Key Authenticator</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2 class="titulo-sidebar">2Key</h2>
+      <button class="item-nav ativo" data-page="seguranca">🔒<span>Segurança</span></button>
+      <!-- <button class="item-nav" data-page="vermelha">🟥<span>Página 2</span></button> -->
+      <button class="item-nav" data-page="gerenciar">🗝️<span>Gerenciar</span></button>
+    </div>
+
+    <main class="conteudo">
+      <div id="pagina-seguranca" class="pagina ativa">
+        <div class="container">
+          <h1>Configurações</h1>
+          <form id="form-config">
+            <section>
+              <h2>Segurança</h2>
+              <label>
+                <span>Tempo sem pedir senha:</span>
+                <select id="tempo-expiracao">
+                  <option value="0">Sempre pedir</option>
+                  <option value="5">5 minutos</option>
+                  <option value="30">30 minutos</option>
+                  <option value="session">Até fechar o navegador</option>
+                  <option value="boot">Até desligar o PC</option>
+                  <option value="forever">Nunca pedir senha</option>
+                </select>
+              </label>
+              <div class="alerta">
+                <h3>⚠️ Atenção: sobre manter a senha salva</h3>
+                <p>
+                  A senha protege os <strong>segredos</strong> usados para gerar seus códigos.
+                  Se você escolher manter a sessão ativa, essa senha será armazenada temporariamente no seu navegador.
+                </p>
+                <p>
+                  Isso pode permitir que outras pessoas acessem seus códigos caso tenham acesso ao seu computador desbloqueado.
+                </p>
+                <p><strong>Use essa opção apenas em computadores e ambientes seguros.</strong></p>
+              </div>
+            </section>
+            <button id="salvar-config" class="botao-salvar" type="submit">Salvar Configurações</button>
+            <p id="mensagem-sucesso" class="mensagem-sucesso" style="display: none;">Configurações salvas com sucesso ✅</p>
+          </form>
+          <footer>
+            <p class="creditos">2Key Authenticator por Thierry Castro</p>
+          </footer>
+        </div>
+      </div>
+
+      <!-- <div id="pagina-vermelha" class="pagina" style="background-color: #dc2626; height: 300px;"></div> -->
+
+      <div id="pagina-gerenciar" class="pagina">
+        <div class="container">
+          <h1>Gerenciar Códigos</h1>
+          <section id="lista-chaves"></section>
+        </div>
+      </div>
+    </main>
+
+    <div id="popup-editar" class="popup" style="display: none;">
+      <div class="popup-conteudo">
+        <h2>Editar Nome</h2>
+        <input type="text" id="novo-nome" placeholder="Novo nome da chave" />
+        <div class="botoes">
+          <button id="cancelar-edicao">Cancelar</button>
+          <button id="salvar-edicao">Salvar</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>

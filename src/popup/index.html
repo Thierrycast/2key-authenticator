@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>2Key Authenticator</title>
-    <link rel="stylesheet" href="popup.css" />
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <div class="janela">
@@ -12,14 +12,23 @@
       <div id="view-inicial" class="view" style="display: none;">
         <h2 class="titulo">Boas-vindas 👋</h2>
         <p class="texto-explica">
-          Para proteger seus códigos 2FA, defina uma <strong>senha mestre</strong>. Ela será usada para criptografar suas chaves secretas e ninguém mais (nem a extensão) poderá acessá-las sem ela.
+          Para proteger seus códigos 2FA, defina uma <strong>senha mestre</strong>.
+          Ela será usada para criptografar suas chaves secretas e ninguém mais
+          (nem a extensão) poderá acessá-las sem ela.
         </p>
+
         <form id="form-senha-inicial" class="form-adicionar">
           <label>
             Definir senha mestre
             <input type="password" name="senha" required />
           </label>
           <button class="botao-salvar" type="submit">Começar</button>
+          <p id="erro-senha-inicial" class="erro" style="min-height: 18px;color: #f87171;
+            font-size: 13px;
+            margin-top: 8px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+          "></p>
         </form>
       </div>
 
@@ -40,7 +49,7 @@
 
       <div class="view" id="view-lista">
         <button id="toggle-privacidade" class="botao-olho" title="Ocultar códigos">
-          <img src="icons/eye-icon.svg" alt="">
+          <img src="../../public/icons/eye-icon.svg" alt="Ícone olho">
         </button>
         <div id="lista-codigos"></div>
         <button class="botao-add" id="abrir-formulario" title="Adicionar chave">+</button>
@@ -51,16 +60,23 @@
         <button id="toggle-visibilidade" class="botao-visibilidade" title="Exibir códigos">Exibir códigos</button>
       </div>
 
-      <div class="view"	 id="view-adicionar" style="display: none">
+      <div class="view" id="view-adicionar" style="display: none">
         <form id="form-chave" class="form-adicionar">
+          <label>
+            Cole um link
+            <input type="text" name="link" placeholder="otpauth://totp/Conta?secret=ABC123..." />
+          </label>
+
           <label>
             Nome da conta
             <input type="text" name="nome" required />
           </label>
+
           <label>
             Chave secreta (base32)
             <input type="text" name="chave" required />
           </label>
+
           <div class="botoes-form">
             <button type="submit" class="botao-salvar">Salvar</button>
             <button type="button" class="botao-cancelar" id="cancelar-form">Cancelar</button>
@@ -70,6 +86,6 @@
     </div>
 
     <button id="abrir-config" class="botao-config">⚙️ Configurações</button>
-    <script type="module" src="./popup/init.js"></script>
+    <script type="module" src="./index.js"></script>
   </body>
 </html>

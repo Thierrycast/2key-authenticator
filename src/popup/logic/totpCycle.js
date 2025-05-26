@@ -1,4 +1,4 @@
-import { gerarTOTP } from "../lib/totp.js";
+import { gerarTOTP } from "../../core/totp.js";
 
 export async function atualizarTotps() {
   const elementos = document.querySelectorAll(".valor");
@@ -9,8 +9,13 @@ export async function atualizarTotps() {
 
   for (const el of elementos) {
     const segredo = el.dataset.segredo;
-    const codigo = await gerarTOTP(segredo);
-    el.textContent = `${codigo.slice(0, 3)} ${codigo.slice(3)}`;
+    try {
+      const codigo = await gerarTOTP(segredo);
+      el.textContent = `${codigo.slice(0, 3)} ${codigo.slice(3)}`;
+    } catch {
+      el.textContent = "Erro";
+      el.style.color = "#f87171";
+    }
 
     if (segundosRestantes <= 5) {
       el.style.color = "#f87171";

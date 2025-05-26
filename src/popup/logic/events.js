@@ -1,8 +1,8 @@
-import { salvarChave, listarChaves } from "../lib/db.js";
-import { descriptografarSegredo, criptografarSegredo } from "../lib/vault.js";
-import { renderCodigos } from "./render.js";
+import { salvarChave, listarChaves } from "../../storage/db.js";
+import { descriptografarSegredo, criptografarSegredo } from "../../core/cryptoVault.js";
+import { renderCodigos } from "../ui/render.js";
 import { atualizarTotps } from "./totpCycle.js";
-import { mostrarView } from "./views.js";
+import { mostrarView } from "../ui/views.js";
 
 export async function carregarChaves(chaveCrypto) {
   const chaves = await listarChaves();
@@ -26,7 +26,8 @@ export async function carregarChaves(chaveCrypto) {
 }
 
 export async function salvarNovaChave(chaveCrypto, nome, segredo) {
-  const id = nome.toLowerCase().replace(/\s+/g, "-");
+  const idBase = nome.toLowerCase().replace(/\s+/g, "-");
+  const id = `${idBase}-${Date.now()}`;
   const { cifrado, iv } = await criptografarSegredo(chaveCrypto, segredo);
 
   await salvarChave({
