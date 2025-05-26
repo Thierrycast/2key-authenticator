@@ -1,11 +1,11 @@
 import { mostrarView } from "./ui/views.js";
 import { atualizarTotps } from "./logic/totpCycle.js";
 import { configurarPrivacidadeOverlay } from "./ui/overlay.js";
-import {inicializarSeguranca,criarSenhaMestre, logarComSenha} from "./logic/auth.js";
-import {carregarChaves, salvarNovaChave} from "./logic/events.js";
+import { inicializarSeguranca,criarSenhaMestre, logarComSenha} from "./logic/auth.js";
+import { carregarChaves, salvarNovaChave} from "./logic/events.js";
 import { listarChaves, lerMeta } from "../storage/db.js";
-import {derivarChave, descriptografarSegredo} from "../core/cryptoVault.js";
-import {sessaoAindaValida,registrarInicioSessao,limparSessao} from "../core/session.js";
+import { derivarChave, descriptografarSegredo} from "../core/cryptoVault.js";
+import { sessaoAindaValida, registrarInicioSessao,limparSessao} from "../core/session.js";
 
 const chaveCryptoRef = { current: null };
 
@@ -50,8 +50,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const erroEl = document.getElementById("erro-senha-inicial");
     erroEl.textContent = "";
     erroEl.style.opacity = "0";
+
     if (!senha) return;
-    
+
     try {
       chaveCryptoRef.current = await criarSenhaMestre(senha);
       localStorage.setItem("senhaMestre", senha);
@@ -96,10 +97,34 @@ document.addEventListener("DOMContentLoaded", async () => {
     const form = e.target;
     const nome = form.nome.value.trim();
     const segredo = form.chave.value.trim();
+
     if (!nome || !segredo || !chaveCryptoRef.current) return;
 
     await salvarNovaChave(chaveCryptoRef.current, nome, segredo);
     form.reset();
+  });
+
+  document.querySelector('input[name="link"]')?.addEventListener("input", (e) => {
+    const valor = e.target.value.trim();
+    if (!valor.startsWith("otpauth://")) return;
+
+    try {
+      const url = new URL(valor);
+      const secret = url.searchParams.get("secret");
+      const label = decodeURIComponent(url.pathname.slice(1));
+
+      if (secret) {
+        const inputSegredo = document.querySelector('input[name="chave"]');
+        const inputNome = document.querySelector('input[name="nome"]');
+
+        if (inputSegredo) inputSegredo.value = secret;
+        if (inputNome && inputNome.value.trim() === "") {
+          inputNome.value = label || "Nova Conta";
+        }
+      }
+    } catch (err) {
+      console.warn("Erro ao interpretar link otpauth:", err);
+    }
   });
 });
 

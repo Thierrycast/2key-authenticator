@@ -23,7 +23,6 @@
             <input type="password" name="senha" required />
           </label>
           <button class="botao-salvar" type="submit">Começar</button>
-
           <p id="erro-senha-inicial" class="erro" style="min-height: 18px;color: #f87171;
             font-size: 13px;
             margin-top: 8px;
@@ -64,13 +63,20 @@
       <div class="view" id="view-adicionar" style="display: none">
         <form id="form-chave" class="form-adicionar">
           <label>
+            Cole um link
+            <input type="text" name="link" placeholder="otpauth://totp/Conta?secret=ABC123..." />
+          </label>
+
+          <label>
             Nome da conta
             <input type="text" name="nome" required />
           </label>
+
           <label>
             Chave secreta (base32)
             <input type="text" name="chave" required />
           </label>
+
           <div class="botoes-form">
             <button type="submit" class="botao-salvar">Salvar</button>
             <button type="button" class="botao-cancelar" id="cancelar-form">Cancelar</button>
