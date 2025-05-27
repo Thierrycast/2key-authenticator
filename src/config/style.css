@@ -1,3 +1,49 @@
+:root {
+  --cor-fundo: #18181b;
+  --cor-texto: #f4f4f5;
+  --cor-fundo-sidebar: #1f1f23;
+  --cor-borda: #2e2e32;
+  --cor-subtexto: #d4d4d8;
+  --cor-subtitulo: #a1a1aa;
+  --cor-input: #27272a;
+  --cor-borda-input: #333;
+  --cor-hover-item: #27272a;
+  --cor-ativo: #2563eb;
+  --cor-ativo-hover: #1d4ed8;
+  --cor-sucesso: #22c55e;
+  --cor-footer: #71717a;
+  --cor-alerta: #fbbf24;
+  --cor-alerta-strong: #facc15;
+  --cor-alerta-h3: #fde047;
+  --cor-chaves-highlight: #a3e635;
+  --cor-popup-overlay: rgba(0, 0, 0, 0.6);
+  --cor-botao-remover: #ef4444;
+  --cor-svg: #a1a1aa;
+}
+
+html[data-theme="light"] {
+  --cor-fundo: #ffffff;
+  --cor-texto: #111111;
+  --cor-fundo-sidebar: #e0e0e0;
+  --cor-borda: #b6b6b6;
+  --cor-subtexto: #555;
+  --cor-subtitulo: #666;
+  --cor-input: #ffffff;
+  --cor-borda-input: #ccc;
+  --cor-hover-item: #f2f2f2;
+  --cor-ativo: #2563eb;
+  --cor-ativo-hover: #1d4ed8;
+  --cor-sucesso: #22c55e;
+  --cor-footer: #999;
+  --cor-alerta: #92400e; 
+  --cor-alerta-strong: #b45309;       
+  --cor-alerta-h3: #78350f;  
+  --cor-chaves-highlight: #65a30d;
+  --cor-popup-overlay: rgba(0, 0, 0, 0.3);
+  --cor-botao-remover: #ef4444;
+  --cor-svg: #555;
+}
+
 body {
   display: flex;
   height: 100vh;
@@ -5,23 +51,23 @@ body {
   padding: 0;
   overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: #18181b;
-  color: #f4f4f5;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
 }
 
 .sidebar {
   width: 200px;
-  background-color: #1f1f23;
+  background-color: var(--cor-fundo-sidebar);
   padding: 24px 16px;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #2e2e32;
+  border-right: 1px solid var(--cor-borda);
 }
 
 .titulo-sidebar {
   font-size: 20px;
   font-weight: bold;
-  color: #f4f4f5;
+  color: var(--cor-texto);
   margin-bottom: 24px;
   text-align: center;
 }
@@ -33,7 +79,7 @@ body {
   padding: 10px 12px;
   border: none;
   background-color: transparent;
-  color: #d4d4d8;
+  color: var(--cor-subtexto);
   border-radius: 8px;
   cursor: pointer;
   font-size: 15px;
@@ -41,11 +87,11 @@ body {
 }
 
 .item-nav:hover {
-  background-color: #27272a;
+  background-color: var(--cor-hover-item);
 }
 
 .item-nav.ativo {
-  background-color: #2563eb;
+  background-color: var(--cor-ativo);
   color: #fff;
 }
 
@@ -72,14 +118,14 @@ h1 {
 h2 {
   font-size: 18px;
   margin-bottom: 12px;
-  color: #a1a1aa;
+  color: var(--cor-subtitulo);
 }
 
 section {
-  border: 1px solid #2e2e32;
+  border: 1px solid var(--cor-borda);
   border-radius: 8px;
   padding: 16px;
-  background-color: #1f1f23;
+  background-color: var(--cor-fundo-sidebar);
 }
 
 label {
@@ -94,14 +140,14 @@ select,
 input[type="checkbox"] {
   font-size: 14px;
   padding: 8px;
-  background-color: #27272a;
-  color: #f4f4f5;
-  border: 1px solid #333;
+  background-color: var(--cor-input);
+  color: var(--cor-texto);
+  border: 1px solid var(--cor-borda-input);
   border-radius: 6px;
 }
 
 button {
-  background-color: #2563eb;
+  background-color: var(--cor-ativo);
   color: white;
   font-size: 14px;
   padding: 10px 16px;
@@ -113,12 +159,12 @@ button {
 }
 
 button:hover {
-  background-color: #1d4ed8;
+  background-color: var(--cor-ativo-hover);
 }
 
 .mensagem-sucesso {
   font-size: 14px;
-  color: #22c55e;
+  color: var(--cor-sucesso);
   margin-top: 12px;
   text-align: center;
 }
@@ -126,7 +172,7 @@ button:hover {
 footer {
   text-align: center;
   font-size: 13px;
-  color: #71717a;
+  color: var(--cor-footer);
   margin-top: 24px;
 }
 
@@ -142,19 +188,19 @@ main .pagina.ativa {
   display: none;
   margin-top: 16px;
   font-size: 13px;
-  color: #fbbf24;
+  color: var(--cor-alerta);
   line-height: 1.7;
 }
 
 .alerta strong {
-  color: #facc15;
+  color: var(--cor-alerta-strong);
   font-weight: 600;
 }
 
 .alerta h3 {
   margin-bottom: 8px;
   font-size: 14px;
-  color: #fde047;
+  color: var(--cor-alerta-h3);
 }
 
 #lista-chaves {
@@ -167,8 +213,8 @@ main .pagina.ativa {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1f1f23;
-  border: 1px solid #2e2e32;
+  background-color: var(--cor-fundo-sidebar);
+  border: 1px solid var(--cor-borda);
   padding: 12px 16px;
   border-radius: 8px;
 }
@@ -178,7 +224,7 @@ main .pagina.ativa {
 }
 
 .chave-item code {
-  color: #a3e635;
+  color: var(--cor-chaves-highlight);
   font-size: 13px;
 }
 
@@ -188,7 +234,7 @@ main .pagina.ativa {
   font-size: 18px;
   cursor: pointer;
   margin-left: 8px;
-  color: #f4f4f5;
+  color: var(--cor-texto);
 }
 
 .chave-item .acoes button:hover {
@@ -198,7 +244,7 @@ main .pagina.ativa {
 .popup {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--cor-popup-overlay);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -206,19 +252,23 @@ main .pagina.ativa {
 }
 
 .popup-conteudo {
-  background-color: #1f1f23;
+  background-color: var(--cor-fundo-sidebar);
   padding: 24px;
   border-radius: 10px;
   width: 90%;
   max-width: 400px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
 }
 
 .popup-conteudo h2 {
   margin-top: 0;
   margin-bottom: 16px;
   font-size: 18px;
-  color: #f4f4f5;
+  color: var(--cor-texto);
 }
 
 .popup-conteudo input {
@@ -226,17 +276,10 @@ main .pagina.ativa {
   padding: 10px;
   font-size: 14px;
   border-radius: 6px;
-  border: 1px solid #333;
-  background-color: #27272a;
-  color: #f4f4f5;
+  border: 1px solid var(--cor-borda-input);
+  background-color: var(--cor-input);
+  color: var(--cor-texto);
   margin-bottom: 16px;
-}
-
-.popup-conteudo {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 12px;
 }
 
 .botoes {
@@ -251,7 +294,7 @@ main .pagina.ativa {
 }
 
 .botao-remover {
-  background-color: #ef4444;
+  background-color: var(--cor-botao-remover);
   border: none;
   color: white;
   padding: 4px 8px;
@@ -269,5 +312,5 @@ main .pagina.ativa {
 .chave-item .acoes svg {
   width: 20px;
   height: 20px;
-  stroke: #a1a1aa;
+  stroke: var(--cor-svg);
 }

@@ -1,4 +1,57 @@
-/* RESET */
+:root {
+  --cor-fundo: #18181b;
+  --cor-texto: #ffffff;
+  --cor-titulo: #f5f5f5;
+  --cor-subtexto: #a1a1aa;
+  --cor-placeholder: #ccc;
+  --cor-borda: #555;
+  --cor-borda-clara: #aaa;
+  --cor-borda-input: #333;
+  --cor-background-hover: #2b2b30;
+  --cor-background-blur: rgba(24, 24, 27, 0.1);
+  --cor-background-input: #27272a;
+  --cor-verde: #22c55e;
+  --cor-verde-hover: #16a34a;
+  --cor-vermelho: #ef4444;
+  --cor-vermelho-hover: #dc2626;
+  --cor-azul: #2563eb;
+  --cor-azul-hover: #1d4ed8;
+  --cor-link: #3b82f6;
+  --cor-tooltip: #333;
+  --cor-tooltip-texto: #fff;
+  --cor-popup: #1f1f23;
+  --cor-popup-texto: #f4f4f5;
+  --cor-overlay: rgba(0, 0, 0, 0.6);
+  --cor-barra-tempo: #2a2a2e;
+}
+
+html[data-theme="light"] {
+  --cor-fundo: #ffffff;
+  --cor-texto: #000000;
+  --cor-titulo: #111111;
+  --cor-subtexto: #555;
+  --cor-placeholder: #666;
+  --cor-borda: #ccc;
+  --cor-borda-clara: #999;
+  --cor-borda-input: #ddd;
+  --cor-background-hover: #f2f2f2;
+  --cor-background-blur: rgba(255, 255, 255, 0.3);
+  --cor-background-input: #f9f9f9;
+  --cor-verde: #22c55e;
+  --cor-verde-hover: #16a34a;
+  --cor-vermelho: #ef4444;
+  --cor-vermelho-hover: #dc2626;
+  --cor-azul: #2563eb;
+  --cor-azul-hover: #1d4ed8;
+  --cor-link: #1d4ed8;
+  --cor-tooltip: #ddd;
+  --cor-tooltip-texto: #000;
+  --cor-popup: #f2f2f2;
+  --cor-popup-texto: #111;
+  --cor-overlay: rgba(0, 0, 0, 0.4);
+  --cor-barra-tempo: #ccc;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,11 +59,11 @@
 }
 
 body {
-  background-color: #18181b;
-  color: white;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  width: 100vw;
-  height: 100vh;
+  width: 360px;
+  height: 500px;
   overflow: hidden;
   padding-top: 16px;
 }
@@ -26,7 +79,7 @@ body {
   font-size: 18px;
   font-weight: 600;
   text-align: center;
-  color: #f5f5f5;
+  color: var(--cor-titulo);
   margin: 16px 0;
 }
 
@@ -62,12 +115,12 @@ body {
 }
 
 .codigo:hover {
-  background-color: #2b2b30;
+  background-color: var(--cor-background-hover);
 }
 
 .nome {
   font-size: 13px;
-  color: #a1a1aa;
+  color: var(--cor-subtexto);
   margin-bottom: 4px;
 }
 
@@ -95,8 +148,8 @@ body {
   height: 44px;
   font-size: 24px;
   font-weight: bold;
-  color: white;
-  background-color: #2563eb;
+  color: #fff;
+  background-color: var(--cor-azul);
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -104,7 +157,7 @@ body {
 }
 
 .botao-add:hover {
-  background-color: #1d4ed8;
+  background-color: var(--cor-azul-hover);
 }
 
 .form-adicionar {
@@ -116,7 +169,7 @@ body {
 .form-adicionar label {
   margin-top: 10px;
   font-size: 13px;
-  color: #ccc;
+  color: var(--cor-placeholder);
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -125,21 +178,21 @@ body {
 .form-adicionar input {
   padding: 10px 14px;
   font-size: 14px;
-  color: white;
-  background-color: #27272a;
-  border: 1px solid #333;
+  color: var(--cor-texto);
+  background-color: var(--cor-background-input);
+  border: 1px solid var(--cor-borda-input);
   border-radius: 8px;
 }
 
 .botoes-form {
   display: flex;
-  justify-content: space-between;
+  gap: 12px;
   margin-top: 24px;
 }
 
 .botao-salvar {
-  background-color: #22c55e;
-  color: white;
+  background-color: var(--cor-verde);
+  color: #fff;
   font-weight: 600;
   border: none;
   border-radius: 6px;
@@ -149,13 +202,13 @@ body {
 }
 
 .botao-salvar:hover {
-  background-color: #16a34a;
+  background-color: var(--cor-verde-hover);
 }
 
 .botao-cancelar {
   background-color: transparent;
-  color: #aaa;
-  border: 1px solid #555;
+  color: var(--cor-placeholder);
+  border: 1px solid var(--cor-borda);
   border-radius: 6px;
   padding: 10px 20px;
   cursor: pointer;
@@ -163,12 +216,12 @@ body {
 }
 
 .botao-cancelar:hover {
-  background-color: #333;
+  background-color: var(--cor-borda-input);
 }
 
 .botao-deletar {
-  background-color: #ef4444;
-  color: white;
+  background-color: var(--cor-vermelho);
+  color: #fff;
   font-weight: 600;
   border: none;
   border-radius: 6px;
@@ -178,7 +231,7 @@ body {
 }
 
 .botao-deletar:hover {
-  background-color: #dc2626;
+  background-color: var(--cor-vermelho-hover);
 }
 
 .linha-valor {
@@ -190,8 +243,8 @@ body {
 }
 
 .copiar-btn {
-  color: #aaa;
-  border: 1px solid #555;
+  color: var(--cor-placeholder);
+  border: 1px solid var(--cor-borda);
   background: transparent;
   border-radius: 6px;
   padding: 6px;
@@ -203,8 +256,8 @@ body {
 }
 
 .copiar-btn:hover {
-  color: #fff;
-  border-color: #ccc;
+  color: var(--cor-texto);
+  border-color: var(--cor-borda-clara);
 }
 
 .icone-copiar {
@@ -224,8 +277,8 @@ body {
   bottom: 100%;
   right: 0;
   margin-bottom: 6px;
-  background-color: #333;
-  color: #fff;
+  background-color: var(--cor-tooltip);
+  color: var(--cor-tooltip-texto);
   font-size: 12px;
   padding: 4px 8px;
   border-radius: 4px;
@@ -243,7 +296,7 @@ body {
 .tempo-barra {
   height: 1px;
   width: 100%;
-  background-color: #2a2a2e;
+  background-color: var(--cor-barra-tempo);
   overflow: hidden;
   margin-top: 6px;
 }
@@ -260,7 +313,7 @@ body {
   width: 100%;
   height: 100%;
   backdrop-filter: blur(8px);
-  background-color: rgba(24, 24, 27, 0.1);
+  background-color: var(--cor-background-blur);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -273,15 +326,15 @@ body {
 
 .mensagem-privada {
   font-size: 14px;
-  color: #ccc;
+  color: var(--cor-placeholder);
   margin-bottom: 16px;
 }
 
 .botao-visibilidade {
   background: transparent;
-  border: 1px solid #555;
+  border: 1px solid var(--cor-borda);
   border-radius: 6px;
-  color: #ccc;
+  color: var(--cor-placeholder);
   font-size: 16px;
   padding: 8px 12px;
   cursor: pointer;
@@ -289,8 +342,8 @@ body {
 }
 
 .botao-visibilidade:hover {
-  background-color: #2b2b30;
-  border-color: #aaa;
+  background-color: var(--cor-background-hover);
+  border-color: var(--cor-borda-clara);
 }
 
 .botao-olho {
@@ -303,8 +356,8 @@ body {
   top: 10px;
   right: 18px;
   background: transparent;
-  border: 1px solid #555;
-  color: #ccc;
+  border: 1px solid var(--cor-borda);
+  color: var(--cor-placeholder);
   border-radius: 50%;
   padding: 6px 10px;
   font-size: 14px;
@@ -313,9 +366,9 @@ body {
 }
 
 .botao-olho:hover {
-  border-color: #aaa;
-  color: #fff;
-  background-color: #2a2a2e;
+  border-color: var(--cor-borda-clara);
+  color: var(--cor-texto);
+  background-color: var(--cor-barra-tempo);
 }
 
 .botao-olho img {
@@ -329,22 +382,22 @@ body {
   bottom: 24px;
   left: 24px;
   font-size: 14px;
-  color: #ccc;
-  background: transparent;
-  border: 1px solid #555;
+  color: var(--cor-placeholder);
+  background: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
   border-radius: 6px;
   padding: 6px 12px;
   cursor: pointer;
 }
 
 .botao-config:hover {
-  background-color: #2b2b30;
-  color: #fff;
-  border-color: #aaa;
+  background-color: var(--cor-background-hover);
+  color: var(--cor-texto);
+  border-color: var(--cor-borda-clara);
 }
 
 .erro {
-  color: #f87171;
+  color: var(--cor-vermelho);
   font-size: 13px;
   margin-top: 8px;
 }
@@ -361,7 +414,7 @@ body {
 
 .link-esqueci a {
   font-size: 13px;
-  color: #3b82f6;
+  color: var(--cor-link);
   text-decoration: underline;
   cursor: pointer;
 }
@@ -369,7 +422,7 @@ body {
 .popup {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: var(--cor-overlay);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -377,12 +430,12 @@ body {
 }
 
 .popup-conteudo {
-  background-color: #1f1f23;
+  background-color: var(--cor-popup);
   padding: 24px;
   border-radius: 10px;
   width: 90%;
   max-width: 400px;
-  color: #f4f4f5;
+  color: var(--cor-popup-texto);
   display: flex;
   flex-direction: column;
   align-items: center;

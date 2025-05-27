@@ -10,7 +10,7 @@
     <div class="sidebar">
       <h2 class="titulo-sidebar">2Key</h2>
       <button class="item-nav ativo" data-page="seguranca">🔒<span>Segurança</span></button>
-      <!-- <button class="item-nav" data-page="vermelha">🟥<span>Página 2</span></button> -->
+      <button class="item-nav" data-page="interface">🎨<span>Interface</span></button>
       <button class="item-nav" data-page="gerenciar">🗝️<span>Gerenciar</span></button>
     </div>
 
@@ -53,7 +53,21 @@
         </div>
       </div>
 
-      <!-- <div id="pagina-vermelha" class="pagina" style="background-color: #dc2626; height: 300px;"></div> -->
+      <div id="pagina-interface" class="pagina">
+        <div class="container">
+          <h1>Interface</h1>
+          <section>
+            <label>
+              <span>Tema visual:</span>
+              <select id="seletor-tema">
+                <option value="auto">Automático</option>
+                <option value="dark">Escuro</option>
+                <option value="light">Claro</option>
+              </select>
+            </label>
+          </section>
+        </div>
+      </div>
 
       <div id="pagina-gerenciar" class="pagina">
         <div class="container">

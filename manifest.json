@@ -9,7 +9,8 @@
     "service_worker": "src/background/background.js"
   },
   "action": {
-    "default_title": "Abrir 2Key"
+    "default_title": "Abrir 2Key",
+    "default_popup": "src/popup/index.html"
   },
   "icons": {
     "16": "public/icons/icon.png",
