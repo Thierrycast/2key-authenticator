@@ -23,12 +23,9 @@
             <input type="password" name="senha" required />
           </label>
           <button class="botao-salvar" type="submit">Começar</button>
-          <p id="erro-senha-inicial" class="erro" style="min-height: 18px;color: #f87171;
-            font-size: 13px;
-            margin-top: 8px;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-          "></p>
+          <p id="erro-senha-inicial" class="erro" style="min-height: 18px; color: #f87171;
+            font-size: 13px; margin-top: 8px; opacity: 0; transition: opacity 0.2s ease;">
+          </p>
         </form>
       </div>
 
@@ -45,6 +42,20 @@
           <button class="botao-salvar" type="submit">Desbloquear</button>
           <p id="erro-login" class="erro" style="display: none; color: #f87171; font-size: 13px;">Senha incorreta</p>
         </form>
+        <p class="link-esqueci">
+          <a href="#" id="esqueci-senha-link">Esqueci minha senha</a>
+        </p>
+      </div>
+
+      <div id="view-redefinir" class="view" style="display: none;">
+        <div class="container" style="padding: 24px; max-width: 400px; margin: 0 auto;">
+          <h2 class="titulo">Redefinir Senha</h2>
+          <p class="texto-explica" style="margin-bottom: 16px;">
+            Por questões de segurança, <strong>não é possível recuperar a senha mestre</strong> após esquecê-la.<br><br>
+            No entanto, você pode redefinir sua senha e começar do zero. Todos os códigos salvos serão apagados.
+          </p>
+          <button id="botao-redefinir" class="botao-deletar">Redefinir e começar do zero</button>
+        </div>
       </div>
 
       <div class="view" id="view-lista">
@@ -87,5 +98,19 @@
 
     <button id="abrir-config" class="botao-config">⚙️ Configurações</button>
     <script type="module" src="./index.js"></script>
+
+    <div id="modal-confirmar-reset" class="popup" style="display: none;">
+      <div class="popup-conteudo">
+        <h2>Redefinir tudo?</h2>
+        <p style="margin-bottom: 16px;">
+          Isso apagará todos os códigos salvos e você precisará criar uma nova senha mestre.
+        </p>
+        <div class="botoes">
+          <button id="cancelar-reset" class="botao-cancelar">Cancelar</button>
+          <button id="confirmar-reset" class="botao-deletar">Redefinir</button>
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>

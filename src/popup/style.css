@@ -166,6 +166,21 @@ body {
   background-color: #333;
 }
 
+.botao-deletar {
+  background-color: #ef4444;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.botao-deletar:hover {
+  background-color: #dc2626;
+}
+
 .linha-valor {
   display: flex;
   align-items: center;
@@ -332,4 +347,70 @@ body {
   color: #f87171;
   font-size: 13px;
   margin-top: 8px;
+}
+
+#view-redefinir{
+  text-align: center;
+  align-items: center;
+}
+
+.link-esqueci {
+  text-align: center;
+  margin-top: 12px;
+}
+
+.link-esqueci a {
+  font-size: 13px;
+  color: #3b82f6;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.popup {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.popup-conteudo {
+  background-color: #1f1f23;
+  padding: 24px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  color: #f4f4f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+.botoes{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.botao-deletar.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.botao-deletar.loading::after {
+  content: " ⏳";
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
 }

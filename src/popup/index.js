@@ -131,3 +131,44 @@ document.addEventListener("DOMContentLoaded", async () => {
 document.getElementById("abrir-config")?.addEventListener("click", () => {
   chrome.runtime.openOptionsPage();
 });
+
+document.getElementById("esqueci-senha-link")?.addEventListener("click", () => {
+  mostrarView("view-redefinir");
+});
+
+document.getElementById("botao-redefinir")?.addEventListener("click", () => {
+  document.getElementById("modal-confirmar-reset").style.display = "flex";
+});
+
+document.getElementById("cancelar-reset")?.addEventListener("click", () => {
+  document.getElementById("modal-confirmar-reset").style.display = "none";
+});
+
+document.getElementById("confirmar-reset")?.addEventListener("click", async () => {
+  const botao = document.getElementById("confirmar-reset");
+  botao.classList.add("loading");
+  botao.textContent = "Apagando...";
+
+  botao.disabled = true;
+
+  localStorage.clear();
+  sessionStorage.clear();
+
+  const req = indexedDB.deleteDatabase("2KeyDB");
+
+  req.onsuccess = () => {
+    document.getElementById("modal-confirmar-reset").style.display = "none";
+    botao.classList.remove("loading");
+    botao.textContent = "Redefinir";
+    botao.disabled = false;
+
+    mostrarView("view-inicial");
+  };
+
+  req.onerror = () => {
+    alert("Erro ao apagar dados.");
+    botao.classList.remove("loading");
+    botao.textContent = "Redefinir";
+    botao.disabled = false;
+  };
+});
